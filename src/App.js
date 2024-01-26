@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import './styles/App.css';
 import Cover from './Cover';
 import MusicBar from "./MusicBar";
@@ -11,8 +11,10 @@ function App() {
     fileUrl: sounds[0].fileUrl
   });
   
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [audio, setAudio] = useState(new Audio(sound.fileUrl));
+  // State depending if sound is playing.
+  const [isPlaying, setIsPlaying] = useState(false); 
+  // State that will store our current selected audio.
+  const [audio, setAudio] = useState(new Audio(sound.fileUrl)); 
 
   function playSong() {
     if (!isPlaying) {
@@ -26,20 +28,27 @@ function App() {
   }
 
   function loadSound(sound) {
+    // Set current sound state to the parameter passed
     setSound(sound);
     audio.src = sound.fileUrl;
-    setIsPlaying(true);
+    // Autoplay when clicked.
+    setIsPlaying(true); 
     audio.play();
   }
 
+  function changeTime(seconds) {
+    audio.currentTime += seconds;
+  }
+
   return (
-    // Render all songs from array.
+    
     <div className='App'>
+      {/* Render all sounds from array */}
       {sounds.map(soundObj => 
         <Cover onPress={loadSound} key={soundObj.id} id={soundObj.id} title={soundObj.title} img={soundObj.imgURL} fileUrl={soundObj.fileUrl}/>
       )}
 
-      <MusicBar onPlaying={() => playSong()} isPlaying={isPlaying}/>
+      <MusicBar onPlaying={() => playSong()} onFastRewind={() => changeTime(-5)}  onFastForward={() => changeTime(5)} isPlaying={isPlaying}/>
     </div>
   );
 }

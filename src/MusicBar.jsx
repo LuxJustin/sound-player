@@ -12,7 +12,7 @@ function MusicBar(props) {
   <div className="music-bar">
     {/* Rewind 5 seconds if pressed */}
     <div>
-      <IconButton>
+      <IconButton onClick={props.onFastRewind}>
         <FastRewindIcon style={{color: 'gray'}} fontSize="large" />
       </IconButton>
     </div>
@@ -26,7 +26,7 @@ function MusicBar(props) {
 
     {/* Fast Forward 5 seconds if pressed */}
     <div>
-      <IconButton>
+      <IconButton onClick={props.onFastForward}>
         <FastForwardIcon style={{color: 'gray'}} fontSize="large" />
       </IconButton>
     </div>

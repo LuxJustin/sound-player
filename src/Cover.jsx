@@ -3,8 +3,9 @@ import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import IconButton from '@mui/material/IconButton';
 
 function Cover(props) {
+  // State to determine if mouse is over component.
   const [MouseOver, setMouseOver] = useState(false);
-
+  // Construct object from props passed.
   const songObject = {
     title: props.title,
     img: props.img,
@@ -13,13 +14,12 @@ function Cover(props) {
 
   return (
 
-    <div onMouseOver={() => setMouseOver(true)} 
-        onMouseOut={() => setMouseOver(false)} 
-        className="cover">
+    <div onMouseOver={() => setMouseOver(true)} onMouseOut={() => setMouseOver(false)} 
+      className="cover">
+      
       <img src={props.img} alt={props.title} />
       <div className="cover-text">
         <h3>{props.title}</h3>
-
       </div>
 
       {/* Render play button */}
